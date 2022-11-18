@@ -5,8 +5,8 @@ const cors = require("cors")
 
 // files imports
 const AuthRouter = require("./Routes/user.routes");
-// const userAuthentication = require("./Middleware/Auth.middleware")
-
+const userAuthentication = require("./Middleware/Auth.middleware")
+const QuestionRoutes = require("./Routes/Questions.routes")
 
 require('dotenv').config()
 const app = express();
@@ -19,10 +19,12 @@ app.use(express.json());
 // Login Singup routes
 app.use("/user", AuthRouter)
 
-// // login user authentication middleware
-// app.use(userAuthentication)
+// login user authentication middleware
+app.use(userAuthentication)
 
+// Question Routes
 
+app.use("/que", QuestionRoutes)
 
 
 
