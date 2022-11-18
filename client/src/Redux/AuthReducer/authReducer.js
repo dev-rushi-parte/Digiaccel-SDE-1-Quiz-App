@@ -23,7 +23,7 @@ export const authReducer = (state = inState, action) => {
             }
         }
         case types.SINGUP_SUCCESS: {
-            console.log(payload, "Response in reducer")
+            // console.log(payload, "Response in reducer")
             return {
                 ...state,
                 isLoading: false,
@@ -32,6 +32,28 @@ export const authReducer = (state = inState, action) => {
         }
 
         case types.SINGUP_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
+        }
+        case types.ADMIN_REQUEST: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+        case types.ADMIN_SUCCESS: {
+            console.log(payload, "Response in reducer")
+            return {
+                ...state,
+                isLoading: false,
+
+            }
+        }
+
+        case types.ADMIN_FAILURE: {
             return {
                 ...state,
                 isLoading: false,

@@ -76,3 +76,35 @@ export const UserLogin = (payload) => (dispatch) => {
 }
 
 
+export const adminRequest = () => ({
+    type: types.ADMIN_REQUEST
+});
+
+export const adminSuccess = (payload) => ({
+    type: types.ADMIN_SUCCESS,
+    payload
+});
+
+export const adminFailure = (payload) => ({
+    type: types.ADMIN_FAILURE,
+    payload
+})
+
+
+
+export const AdminSingup = (payload) => (dispatch) => {
+    dispatch(adminRequest());
+
+
+    return axios.post("/user/admin", payload)
+        .then((res) => {
+
+            return dispatch(adminSuccess(res))
+
+        })
+        .catch((err) => {
+
+            return adminFailure(err)
+
+        })
+}

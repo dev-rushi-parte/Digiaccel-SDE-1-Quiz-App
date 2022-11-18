@@ -3,6 +3,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import Admin from '../Pages/Account/Admin';
 import Home from '../Pages/Account/Home';
 import Login from '../Pages/Account/Login';
 import Signup from '../Pages/Account/Signup';
@@ -14,6 +15,7 @@ export default function MainRoutes() {
                 <Route path='/' element={<Home />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/admin' element={<Admin />} />
 
 
                 <Route path="*" element={<PageNotfound />} />
