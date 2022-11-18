@@ -8,7 +8,7 @@ function NavbarTop() {
     const navigate = useNavigate()
     return (
         <div>
-            <Navbar bg="dark" className='p-3' variant="dark" expand="lg">
+            <Navbar bg="dark" fixed="top" className='p-3' variant="dark" expand="lg">
                 <Container>
                     <Navbar.Brand style={{ cursor: "pointer" }} onClick={() => navigate("/")}>React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -3,10 +3,10 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
-import Home from '../Pages/Home';
-import Login from '../Pages/Login';
+import Home from '../Pages/Account/Home';
+import Login from '../Pages/Account/Login';
+import Signup from '../Pages/Account/Signup';
 import PageNotfound from '../Pages/PageNotfound';
-import Signup from '../Pages/Signup';
 export default function MainRoutes() {
     return (
         <>

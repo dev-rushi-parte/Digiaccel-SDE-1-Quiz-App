@@ -5,11 +5,20 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import "../node_modules/react-bootstrap/dist/react-bootstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import { Provider } from 'react-redux';
+import axios from 'axios';
+import { Store } from './Redux/Store';
+
+axios.defaults.baseURL = "http://localhost:2784";
+axios.defaults.headers.post["Content-Type"] = "application/json";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    <Provider store={Store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

@@ -11,3 +11,10 @@
     cursor: pointer;
 
 }
+
+#alert {
+    position: absolute;
+    left: 30%;
+
+
+}
