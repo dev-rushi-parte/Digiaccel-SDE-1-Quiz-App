@@ -51,7 +51,50 @@ AuthRouter.post("/singup", checkAllFields, async (req, res) => {
 
 })
 
+// singup
+AuthRouter.post("/admin", checkAllFields, async (req, res) => {
 
+    const { email, name, password } = req.body
+    // console.log(email)
+    const checkUserEmail = await UserModel.findOne({ email }).exec();
+    const checkName = await UserModel.findOne({ name }).exec();
+
+    if (checkUserEmail) {
+
+        res.status(403).send({ "message": "User already exists" })
+    }
+    else if (checkName) {
+
+        res.status(403).send({ "message": "User already exists" })
+    }
+
+
+    else {
+        try {
+            await bcrypt.genSalt(6, async function (err, salt) {
+                bcrypt.hash(password, salt, async function (err, hash) {
+                    if (err) {
+                        res.send("please try again")
+                    }
+                    const user = new UserModel({
+                        email,
+                        name,
+                        password: hash,
+                        role: "admin"
+                    })
+
+                    await user.save();
+                    res.send("Singup is successfull")
+                });
+            });
+        }
+        catch (err) {
+            console.log(err);
+            res.status(500).send(err)
+        }
+    }
+
+})
 // Login
 
 AuthRouter.post("/login", checkLoginFields, async (req, res) => {

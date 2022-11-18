@@ -2,8 +2,16 @@ const QuestionRoutes = require("express").Router();
 
 const QuestionModel = require("../Models/AddQuestion.model");
 const Authorization = require("../Middleware/Authorization.middleware");
+const UserModel = require("../Models/User.model")
 
+// get the login in user
+QuestionRoutes.get("/loginuser", async (req, res) => {
 
+    const { userId } = req.body;
+
+    const user = await await UserModel.findById(userId);
+    res.send(user)
+})
 
 
 QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, res) => {
@@ -55,10 +63,11 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
 
 })
 
-QuestionRoutes.get("/", async (req, res) => {
+QuestionRoutes.get("/", Authorization(["admin"]), async (req, res) => {
 
 
     try {
+
         let questions = await QuestionModel.aggregate([{ $sample: { size: 10 } }])
 
         res.status(200).send({ "Total": questions })
@@ -68,4 +77,8 @@ QuestionRoutes.get("/", async (req, res) => {
         res.status(404).json({ err: "Qutestion Not Found" })
     }
 })
+
+
+
+
 module.exports = QuestionRoutes
