@@ -10,7 +10,7 @@ function NavbarTop() {
         <div>
             <Navbar bg="dark" className='p-3' variant="dark" expand="lg">
                 <Container>
-                    <Navbar.Brand onClick={() => navigate("/")}>React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand style={{ cursor: "pointer" }} onClick={() => navigate("/")}>React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
