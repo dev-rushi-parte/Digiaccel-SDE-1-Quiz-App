@@ -1,11 +1,12 @@
 import React from 'react'
 import NavbarTop from '../Component/NavbarTop'
 
-export default function Home() {
+function Login() {
     return (
         <div>
-             <NavbarTop />
-            <h1>Home</h1>
-        </div>
+            <NavbarTop />
+            Login</div>
     )
 }
+
+export default Login
