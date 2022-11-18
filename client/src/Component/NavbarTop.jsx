@@ -16,7 +16,7 @@ function NavbarTop() {
                         <Nav className="ms-auto">
                             <Nav.Link className="rounded-3 me-3 bg-light text-dark" onClick={() => navigate("/login")}   >LogIn</Nav.Link>
                             <Nav.Link className="rounded-3 me-3 bg-light text-dark" onClick={() => navigate("/signup")}>SignUp</Nav.Link>
-                            <Nav.Link className="rounded-3 me-3 bg-danger text-white" onClick={() => navigate("/admin")}>Admin</Nav.Link>
+                            <Nav.Link className="rounded-3 me-3 bg-danger text-white" onClick={() => navigate("/admin_singup")}>Admin</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

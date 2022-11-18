@@ -9,7 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 import { AdminSingup } from '../../Redux/AuthReducer/action';
 import { useNavigate } from 'react-router-dom';
 
-function Admin() {
+function Admin_Singup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -121,4 +121,4 @@ function Admin() {
     )
 }
 
-export default Admin
+export default Admin_Singup
