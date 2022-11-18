@@ -108,3 +108,30 @@ export const AdminSingup = (payload) => (dispatch) => {
 
         })
 }
+
+// for login user
+
+export const loginUser = (payload) => {
+    return {
+        type: types.GET_LOGIN_USER,
+        payload
+    }
+}
+
+export const LoginUserData = (token) => async (dispatch) => {
+
+    return await axios.get("/que/loginuser", {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then((res) => {
+            return (dispatch(loginUser(res.data)))
+            // console.log(res.data)
+
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
