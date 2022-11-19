@@ -5,33 +5,87 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { UserLogin } from '../../Redux/AuthReducer/action';
-import Alert from 'react-bootstrap/Alert';
-
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 function AddQuestions() {
 
     const [question, setQuestion] = useState("")
+    const [multi, setMulti] = useState(false)
     const [answer, setAnswer] = useState("")
-
+    const [answer2, setAnswer2] = useState("")
+    const [option1, setOption1] = useState("")
+    const [option2, setOption2] = useState("")
+    const [option3, setOption3] = useState("")
+    const [option4, setOption4] = useState("")
+    const [difficulty, setDifficulty] = useState()
     const navigate = useNavigate();
 
     const AddQuestion = (e) => {
         e.preventDefault()
+        if (multi) {
+            const payload = {
+                difficulty,
+                question,
+                multiAnswer: [answer, answer2],
+                option1,
+                option2,
+                option3,
+                option4,
+            }
+            console.log(payload)
+        }
+        else {
+            const payload = {
+                difficulty,
+                question,
+                answer,
+                option1,
+                option2,
+                option3,
+                option4,
+            }
+            console.log(payload)
+        }
     }
 
+
+    const QuestionType = (e) => {
+        console.log(e.target.value)
+
+        if (e.target.value == 'multi') {
+            setMulti(true)
+        }
+        else {
+            setMulti(false)
+        }
+    }
 
     let difficultyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     return (
         <div>
             <NavbarTop />
             <div style={{ marginTop: "8rem" }}>
-                <div className='pb-4 container center_div col-md-4 border border-5 border-dark rounded-3 mt-5'>
+                <div className='pb-4 container center_div col-md-6 border border-5 border-dark rounded-3 mt-5'>
                     <h1 className='text-center mt-5 '>Create Questions</h1>
+
+
+
+
                     <Form onSubmit={AddQuestion} className='mt-3 p-5' >
+
+
+                        <Form.Group className="mb-3 ">
+                            <Form.Label className=''>Select Question Type</Form.Label>
+                            <Form.Select onChange={QuestionType} className='text-center' >
+                                <option value="single">Single Correct Answer</option>
+                                <option value="multi">Multiple Correct Answers</option>
+
+
+                            </Form.Select>
+                        </Form.Group>
 
                         <Form.Group className="mb-3 ">
                             <Form.Label>Select Difficulty level</Form.Label>
-                            <Form.Select className='text-center' >
+                            <Form.Select className='text-center' onChange={(e) => setDifficulty(e.target.value)}>
                                 <option>Select Difficulty</option>
                                 {difficultyArr.map((item, i) => (
                                     <option key={i} value={item} >{item}</option>
@@ -40,34 +94,107 @@ function AddQuestions() {
 
                             </Form.Select>
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="formBasicEmail">
+
                             <Form.Label>Question</Form.Label>
-                            <Form.Control value={question}
-                                maxLength="30" required
-                                onChange={(e) => setQuestion(e.target.value)}
-                                type="text"
-                                placeholder="Enter Question" />
+                            <FloatingLabel controlId="floatingTextarea2" label="Enter Question">
+
+                                <Form.Control
+                                    value={question}
+                                    required
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    as="textarea"
+                                    style={{ height: '100px' }}
+                                />
+                            </FloatingLabel>
+                        </Form.Group>
+
+
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Answer</Form.Label>
+
+                            <FloatingLabel
+                                controlId="floatingTextarea"
+                                label="Answer"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    as="textarea"
+                                    value={answer}
+                                    required
+                                    onChange={(e) => setAnswer(e.target.value)} />
+
+                            </FloatingLabel>
 
                         </Form.Group>
 
+                        {multi ?
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Answer 2</Form.Label>
+
+                                <Form.Control
+                                    value={answer2}
+                                    required
+                                    onChange={(e) => setAnswer2(e.target.value)}
+                                    type='text'
+                                    placeholder="Answer 2" />
+
+
+                            </Form.Group> : ""}
+
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Option 1</Form.Label>
 
                             <Form.Control
-                                value={answer}
-                                minLength="6" required
-                                onChange={(e) => setAnswer(e.target.value)}
+                                value={option1}
+                                required
+                                onChange={(e) => setOption1(e.target.value)}
                                 type='text'
-                                placeholder="Password" />
+                                placeholder="Option 1" />
+
+
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Option 2</Form.Label>
+
+                            <Form.Control
+                                value={option2}
+                                required
+                                onChange={(e) => setOption2(e.target.value)}
+                                type='text'
+                                placeholder="Option 2" />
+
+
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Option 3</Form.Label>
+
+                            <Form.Control
+                                value={option3}
+                                required
+                                onChange={(e) => setOption3(e.target.value)}
+                                type='text'
+                                placeholder="Option 3" />
+
+
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Option 4</Form.Label>
+
+                            <Form.Control
+                                value={option4}
+                                required
+                                onChange={(e) => setOption4(e.target.value)}
+                                type='text'
+                                placeholder="Option 4" />
 
 
                         </Form.Group>
 
                         <Button className='col-md-12 mt-5 ' variant="primary" type="submit">
-                            LogIn
+                            Add Question
                         </Button>
-                        <Button onClick={() => navigate("/signup")} style={{ marginLeft: '45%' }} variant="link"> Have an account? Sign up</Button>
 
                     </Form>
                 </div>
