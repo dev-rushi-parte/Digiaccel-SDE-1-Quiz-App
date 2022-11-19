@@ -26,3 +26,27 @@ export const CreateQuestions = (payload) => async (dispatch) => {
             console.log(err)
         })
 }
+
+
+export const getquizlink = (payload) => ({
+    type: types.GET_QUIZ_LINK,
+    payload
+})
+
+export const GetQuizLink = (payload) => async (dispatch) => {
+
+    return await axios.post(`/que/${payload.id}`, payload, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${payload.token}`
+        }
+    })
+        .then((res) => {
+            return (dispatch(getquizlink(res)))
+            // console.log(res)
+
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

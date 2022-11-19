@@ -4,7 +4,6 @@ import NavbarTop from '../../Component/NavbarTop'
 import style from './Admin.module.css'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import useClipboard from 'react-hook-clipboard'
 import { useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import Col from 'react-bootstrap/Col';
@@ -12,24 +11,53 @@ import Row from 'react-bootstrap/Row';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { useNavigate } from 'react-router-dom';
 import uuid from "react-uuid"
+import { useDispatch, useSelector } from 'react-redux';
+import { GetQuizLink } from '../../Redux/AppReducer/Action';
 
 function AdminHome() {
-    const [clipboard, copyToClipboard] = useClipboard();
     const [link, setLink] = useState()
     const [copyStatus, setCopyStatus] = useState(false)
-    const toClipboard = 'IJust checking'
+    const [limit, setLimit] = useState('10')
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.authToken)
+
+
+    const handelCopy = () => {
+        navigator.clipboard.writeText(link)
+        setShow(true)
+    }
+
     const HandelSelect = (e) => {
-        setLink(toClipboard)
-        console.log(e.target.value)
+
+        setLimit(e.target.value)
     }
 
     const GenerateLink = () => {
-        setCopyStatus(true)
+
         const id = uuid()
-        console.log(id)
+        // console.log(id)
+        const payload = {
+            id,
+            token,
+            limit
+        }
+        dispatch(GetQuizLink(payload))
+            .then((res) => {
+                console.log(res)
+                if (res.type == "GET_QUIZ_LINK") {
+                    setLink(res.payload.data.URL)
+                    setCopyStatus(true)
+
+                }
+            })
+        console.log(payload)
+
     }
+
+
+
 
     return (
         <div>
@@ -55,14 +83,21 @@ function AdminHome() {
                             <option value="20">20</option>
                             <option value="30">30</option>
                         </Form.Select>
+
+
                         <div id={style.copyBox} className='mt-4 mb-4'>
-                            {copyStatus ? <div onClick={() => setShow(true)} >
-                                <p id={style.Copy} className='bg-success p-4 text-white rounded-3' onClick={() => copyToClipboard(toClipboard)}>
-                                    Click To Copy Link: {link}
+                            {copyStatus ? <div>
+                                <p id={style.Copy}
+                                    className='bg-success p-4 text-white rounded-3'
+                                    onClick={handelCopy}>
+                                    <span className='text-warning fs-6 bold'>Click To Copy Link:</span> {link}
                                 </p>
                             </div> : ""}
                         </div>
+
                         <Button onClick={GenerateLink} variant="dark">Generate Link</Button>
+
+
                     </Card.Body>
                 </Card>
                 <div id={style.AddBtn} >

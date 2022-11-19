@@ -14,7 +14,23 @@ export const AppReducer = (state = inState, action) => {
 
     switch (type) {
 
-
+        case types.ADD_QUESTION: {
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                payload
+            }
+        }
+        case types.GET_QUIZ_LINK: {
+            console.log(payload)
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                payload
+            }
+        }
         default:
             return state
 

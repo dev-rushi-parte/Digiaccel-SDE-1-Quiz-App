@@ -3,7 +3,6 @@ import NavbarTop from '../../Component/NavbarTop'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { CreateQuestions } from '../../Redux/AppReducer/Action';
@@ -18,11 +17,11 @@ function AddQuestions() {
     const [option3, setOption3] = useState("")
     const [option4, setOption4] = useState("")
     const [difficulty, setDifficulty] = useState()
-    // const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const token = useSelector((state) => state.auth.authToken)
 
+    // Add question Function
     const AddQuestion = (e) => {
         e.preventDefault()
         if (multi) {
@@ -75,6 +74,7 @@ function AddQuestions() {
     }
 
 
+    // ?for question Type multi or single
     const QuestionType = (e) => {
         console.log(e.target.value)
 
@@ -85,7 +85,7 @@ function AddQuestions() {
             setMulti(false)
         }
     }
-
+    // for question level
     let difficultyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     return (
         <div>
