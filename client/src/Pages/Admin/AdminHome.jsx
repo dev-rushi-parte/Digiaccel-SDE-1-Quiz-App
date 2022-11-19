@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { useNavigate } from 'react-router-dom';
+import uuid from "react-uuid"
+
 function AdminHome() {
     const [clipboard, copyToClipboard] = useClipboard();
     const [link, setLink] = useState()
@@ -25,6 +27,8 @@ function AdminHome() {
 
     const GenerateLink = () => {
         setCopyStatus(true)
+        const id = uuid()
+        console.log(id)
     }
 
     return (
