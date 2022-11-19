@@ -92,7 +92,7 @@ export const adminFailure = (payload) => ({
 
 
 
-export const AdminSingup = (payload) => (dispatch) => {
+export const AdminSingupAction = (payload) => (dispatch) => {
     dispatch(adminRequest());
 
 

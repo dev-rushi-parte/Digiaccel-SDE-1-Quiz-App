@@ -1,0 +1,19 @@
+#copyBox {
+    height: 80px;
+}
+
+#AddBtn {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+@media only screen and (max-width: 600px) {
+    #AddBtn {
+        width: 100%;
+     
+    }
+}

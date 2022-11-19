@@ -42,14 +42,22 @@ function Signup() {
                 if (res.type == "SINGUP_SUCCESS") {
                     setAlertSuccess(true)
                     navigate("/login")
+                    setTimeout(() => {
+                        setAlertSuccess(false)
+                    }, 1000)
                 }
                 else if (res.type == "SINGUP_FAILURE") {
                     setAlertFail(true)
                     setAlertSms(res.payload.response.data.message)
-
+                    setTimeout(() => {
+                        setAlertFail(false)
+                    }, 1000)
                 }
                 else {
                     setAlertFail(true)
+                    setTimeout(() => {
+                        setAlertFail(false)
+                    }, 1000)
                 }
 
             })

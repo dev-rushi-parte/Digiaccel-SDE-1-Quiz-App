@@ -6,10 +6,10 @@ import { useState } from 'react';
 import styles from './All.module.css'
 import { useDispatch } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
-import { AdminSingup } from '../../Redux/AuthReducer/action';
+import { AdminSingupAction } from '../../Redux/AuthReducer/action';
 import { useNavigate } from 'react-router-dom';
 
-function Admin_Singup() {
+function AdminSingup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -32,7 +32,7 @@ function Admin_Singup() {
             password
         }
         console.log(payload)
-        dispatch(AdminSingup(payload))
+        dispatch(AdminSingupAction(payload))
             .then((res) => {
                 console.log(res)
                 setName("")
@@ -41,15 +41,24 @@ function Admin_Singup() {
 
                 if (res.type == "ADMIN_SUCCESS") {
                     setAlertSuccess(true)
+                    setTimeout(() => {
+                        setAlertSuccess(false)
+                    }, 1000)
                     navigate("/login")
                 }
                 else if (res.type == "SINGUP_FAILURE") {
                     setAlertFail(true)
                     setAlertSms(res.payload.response.data.message)
+                    setTimeout(() => {
+                        setAlertFail(false)
+                    }, 1000)
 
                 }
                 else {
                     setAlertFail(true)
+                    setTimeout(() => {
+                        setAlertFail(false)
+                    }, 1000)
                 }
 
             })
@@ -121,4 +130,4 @@ function Admin_Singup() {
     )
 }
 
-export default Admin_Singup
+export default AdminSingup

@@ -7,9 +7,9 @@ function AddQuestions() {
             <NavbarTop />
             <div style={{ marginTop: "8rem" }}>
 
-                AdminHome
+                
             </div>
-            AddQuestions</div>
+            </div>
     )
 }
 

@@ -19,7 +19,6 @@ function Login() {
     let dispatch = useDispatch()
     let navigate = useNavigate()
 
-
     const handleClick = () => setShow(!show);
 
     const SubmitForm = (e) => {
@@ -38,15 +37,28 @@ function Login() {
 
                 if (res.type == "LOGIN_SUCCESS") {
                     setAlertSuccess(true)
+
+                    setTimeout(() => {
+                        setAlertSuccess(false)
+                    }, 2000)
                     navigate("/")
+
+
                 }
                 else if (res.type == "LOGIN_FAILURE") {
                     setAlertFail(true)
                     setAlertSms(res.payload.response.data.message)
+                    setTimeout(() => {
+                        setAlertFail(false)
+                    }, 2000)
 
                 }
                 else {
                     setAlertFail(true)
+                    setTimeout(() => {
+                        setAlertFail(false)
+                    }, 2000)
+
                 }
 
             })
