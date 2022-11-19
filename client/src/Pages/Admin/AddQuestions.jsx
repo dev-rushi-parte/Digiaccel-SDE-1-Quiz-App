@@ -4,8 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { CreateQuestions } from '../../Redux/AppReducer/Action';
 function AddQuestions() {
 
     const [question, setQuestion] = useState("")
@@ -17,33 +18,59 @@ function AddQuestions() {
     const [option3, setOption3] = useState("")
     const [option4, setOption4] = useState("")
     const [difficulty, setDifficulty] = useState()
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    const token = useSelector((state) => state.auth.authToken)
 
     const AddQuestion = (e) => {
         e.preventDefault()
         if (multi) {
             const payload = {
+                token,
                 difficulty,
                 question,
                 multiAnswer: [answer, answer2],
                 option1,
                 option2,
                 option3,
-                option4,
+                option4
             }
             console.log(payload)
+            dispatch(CreateQuestions(payload))
+                .then((res) => {
+                    console.log(res)
+                    if (res.type == 'ADD_QUESTION') {
+                        alert("Question Created")
+                    }
+                    else {
+                        alert("Something went wrong")
+                    }
+                })
         }
         else {
             const payload = {
+                token,
                 difficulty,
                 question,
                 answer,
                 option1,
                 option2,
                 option3,
-                option4,
+                option4
             }
-            console.log(payload)
+            dispatch(CreateQuestions(payload))
+                .then((res) => {
+                    console.log(res)
+                    if (res.type == 'ADD_QUESTION') {
+                        alert("Question Created")
+                    }
+                    else {
+                        alert("Something went wrong")
+                    }
+                })
+
+            // console.log(payload)
         }
     }
 
