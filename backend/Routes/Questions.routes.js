@@ -65,7 +65,7 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
 
 })
 
-QuestionRoutes.get("/:id", Authorization(["admin"]), async (req, res) => {
+QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
 
     try {
 
@@ -75,12 +75,27 @@ QuestionRoutes.get("/:id", Authorization(["admin"]), async (req, res) => {
             LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
         ))
 
-      
-        res.status(200).send({ "Total": LinkQuestions })
+        const fullURL = "http://" + req.get('host') + "/" + que + "/" + req.params.id;
+
+        res.status(200).send({ "Total": fullURL })
 
     }
     catch (err) {
         res.status(404).json({ err: "Qutestion Not Found" })
+    }
+})
+
+QuestionRoutes.get("/:uuid", async (req, res) => {
+    const { uuid } = req.params;
+
+    const data = await LinkQuestionsModel.find({ uuid });
+    console.log(data.length)
+
+    if (data.length <= 0) {
+        res.send({ erroe: true, "msg": "Error 404, This url not Found" })
+    }
+    else {
+        res.send({ Total: data.length, data })
     }
 })
 
