@@ -76,7 +76,7 @@ QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
             LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
         ))
 
-        const fullURL = "http://" + req.get('host') + "/" + "que" + "/" + req.params.id;
+        const fullURL = "http://" + "localhost:3000" + "/" + "quiz" + "/" + req.params.id;
 
         res.status(200).send({ "URL": fullURL })
 
@@ -87,16 +87,19 @@ QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
 })
 
 QuestionRoutes.get("/:uuid", async (req, res) => {
+
     const { uuid } = req.params;
 
-    const data = await LinkQuestionsModel.find({ uuid });
-    console.log(data.length)
+
+    const data = await LinkQuestionsModel.find({ uuid })
+
+    // console.log(data.length)
 
     if (data.length <= 0) {
         res.send({ erroe: true, "msg": "Error 404, This url not Found" })
     }
     else {
-        res.send({ Total: data.length, data })
+        res.status(200).send({ Total: data.length, data })
     }
 })
 
