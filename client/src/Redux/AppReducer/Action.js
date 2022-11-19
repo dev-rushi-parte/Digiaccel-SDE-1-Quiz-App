@@ -50,3 +50,26 @@ export const GetQuizLink = (payload) => async (dispatch) => {
             console.log(err)
         })
 }
+
+export const getquestion = (payload) => ({
+    type: types.GET_QUESTIONS,
+    payload
+})
+
+export const GetQuestions = (payload) => async (dispatch) => {
+
+    return axios.get(`/que/${payload.uuid}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${payload.token}`
+        }
+    })
+        .then((res) => {
+            return (dispatch(getquestion(res.data)))
+            // console.log(res)
+
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

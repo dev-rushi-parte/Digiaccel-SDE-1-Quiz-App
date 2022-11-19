@@ -11,6 +11,7 @@ import Signup from '../Pages/Account/Signup';
 import AddQuestions from '../Pages/Admin/AddQuestions';
 import AdminHome from '../Pages/Admin/AdminHome';
 import PageNotfound from '../Pages/PageNotfound';
+import QuizPage from '../Pages/Student/QuizPage';
 import StudentHome from '../Pages/Student/StudentHome';
 
 export default function MainRoutes() {
@@ -28,6 +29,7 @@ export default function MainRoutes() {
 
                 {/* Student Routes */}
                 <Route path='/student' element={<PrivateAuth><StudentHome /></PrivateAuth>} />
+                <Route path='/quiz/:id' element={<PrivateAuth><QuizPage /></PrivateAuth>} />
 
                 <Route path="*" element={<PageNotfound />} />
             </Routes>

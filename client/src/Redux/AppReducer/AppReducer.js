@@ -18,16 +18,25 @@ export const AppReducer = (state = inState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                isError: true,
+                isError: false,
                 payload
             }
         }
         case types.GET_QUIZ_LINK: {
-            console.log(payload)
+            // console.log(payload)
             return {
                 ...state,
                 isLoading: false,
-                isError: true,
+                isError: false,
+                payload
+            }
+        }
+        case types.GET_QUESTIONS: {
+            // console.log(payload)
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
                 payload
             }
         }
