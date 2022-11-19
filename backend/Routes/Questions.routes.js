@@ -68,16 +68,17 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
 QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
 
     try {
-
-        let questions = await QuestionModel.aggregate([{ $sample: { size: 10 } }])
+        const { limit } = req.body;
+        console.log(limit, req.params.id)
+        let questions = await QuestionModel.aggregate([{ $sample: { size: Number(limit) } }])
 
         const LinkQuestions = questions?.filter((r) => delete (r._id)).map((q) => (
             LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
         ))
 
-        const fullURL = "http://" + req.get('host') + "/" + que + "/" + req.params.id;
+        const fullURL = "http://" + req.get('host') + "/" + "que" + "/" + req.params.id;
 
-        res.status(200).send({ "Total": fullURL })
+        res.status(200).send({ "URL": fullURL })
 
     }
     catch (err) {
