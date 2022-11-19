@@ -3,6 +3,8 @@ const QuestionRoutes = require("express").Router();
 const QuestionModel = require("../Models/AddQuestion.model");
 const Authorization = require("../Middleware/Authorization.middleware");
 const UserModel = require("../Models/User.model")
+const LinkQuestionsModel = require("../Models/LinkQuestions.model")
+
 
 // get the login in user
 QuestionRoutes.get("/loginuser", async (req, res) => {
@@ -63,14 +65,18 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
 
 })
 
-QuestionRoutes.get("/", Authorization(["admin"]), async (req, res) => {
-
+QuestionRoutes.get("/:id", Authorization(["admin"]), async (req, res) => {
 
     try {
 
         let questions = await QuestionModel.aggregate([{ $sample: { size: 10 } }])
 
-        res.status(200).send({ "Total": questions })
+        const LinkQuestions = questions?.filter((r) => delete (r._id)).map((q) => (
+            LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
+        ))
+
+      
+        res.status(200).send({ "Total": LinkQuestions })
 
     }
     catch (err) {
