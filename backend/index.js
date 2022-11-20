@@ -7,7 +7,7 @@ const cors = require("cors")
 const AuthRouter = require("./Routes/user.routes");
 const userAuthentication = require("./Middleware/Auth.middleware")
 const QuestionRoutes = require("./Routes/Questions.routes")
-
+const ResultRouter = require("./Routes/ResultAttempt.routes")
 require('dotenv').config()
 const app = express();
 app.use(cors());
@@ -26,7 +26,9 @@ app.use(userAuthentication)
 
 app.use("/que", QuestionRoutes)
 
+// Results Routes
 
+app.use("/result", ResultRouter)
 
 
 
