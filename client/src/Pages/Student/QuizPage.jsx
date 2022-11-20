@@ -5,15 +5,22 @@ import Button from 'react-bootstrap/esm/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { GetQuestions } from '../../Redux/AppReducer/Action'
+import Quiz from './Quiz'
 import style from "./Quiz.module.css";
+import Start from './Start'
 
 
 function QuizPage() {
     const [allQuestions, setAllQestions] = useState([]);
+    const [start, setStart] = useState(false)
+    const [current, setCurrent] = useState(5)
     const { id } = useParams()
     const token = useSelector((state) => state.auth.authToken)
     const dispatch = useDispatch()
-    console.log(allQuestions)
+    console.log(allQuestions[0])
+
+    const SortedData = allQuestions.sort((a, b) => a.difficulty - b.difficulty)
+    console.log(SortedData)
 
     const GetData = () => {
 
@@ -33,20 +40,16 @@ function QuizPage() {
     useEffect(() => {
         GetData()
     }, [])
+
+
+
     return (
         <>
-            <div style={{ marginTop: "8rem" }} className=' bg-dark col-md-5  container center_div text-center border border-dark rounded-3' >
-
-                <img
-                    className=' mt-5 col-md-10 col-sm-5 col-10'
-                    src='https://digiaccel.in/desktopbrandlogos/learn_gethired.svg'
-                    alt='Img' />
-
-
-                <h1 className='text-white mt-5 mb-5' >Wel-Come To Quiz</h1>
-
-                <Button className='col-lg-6 col-sm-5 col-5 mb-5' >Start</Button>
-            </div>
+            {start ?
+                <Quiz question={SortedData[current]} setCurrent={setCurrent} />
+                :
+                <Start setStart={setStart} />
+            }
         </>
     )
 }

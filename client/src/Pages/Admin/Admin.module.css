@@ -1,5 +1,6 @@
 #copyBox {
     height: 80px;
+    cursor: pointer;
 }
 
 #AddBtn {
@@ -14,6 +15,6 @@
 @media only screen and (max-width: 600px) {
     #AddBtn {
         width: 100%;
-     
+
     }
 }

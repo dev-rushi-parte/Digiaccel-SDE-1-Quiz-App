@@ -85,7 +85,7 @@ function AdminHome() {
                         </Form.Select>
 
 
-                        <div id={style.copyBox} className='mt-4 mb-4'>
+                        <div id={style.copyBox} className='mt-4 mb-4 '>
                             {copyStatus ? <div>
                                 <p id={style.Copy}
                                     className='bg-success p-4 text-white rounded-3'

@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#options {
+    /* margin: auto; */
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 20rem);
+    grid-template-rows: repeat(2, 6rem);
+    justify-content: space-around;
+    width: 100%;
+}
+
+#options button {
+    width: 300px;
+}
+
+
+#options button:hover {
+    background-color: rgb(7, 207, 0) !important;
+    color: White !important;
+
+}
+
+#correctAns {
+    color: green !important;
+    background-color: rgb(7, 207, 0) !important;
+}
+
+#correct {
+    background-color: rgb(7, 207, 0) !important;
+    color: White !important;
+}
+
+#wrong {
+    background-color: red !important;
+    color: White !important;
+}
+
+#nextDisable {
+    cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+    #options {
+        /* margin: auto; */
+        border: 1px solid red;
+        display: grid;
+        grid-template-columns: repeat(2, 12rem);
+        grid-template-rows: repeat(2, 6rem);
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    #options button {
+        width: 200px;
+    }
+}
+
+@media (max-width: 590px) {
+    #options {
+        /* margin: auto; */
+        border: 1px solid red;
+        display: grid;
+        grid-template-columns: repeat(1, 25rem);
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    #options button {
+        width: 400px;
+    }
+}
