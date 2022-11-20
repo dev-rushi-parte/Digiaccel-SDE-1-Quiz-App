@@ -1,10 +1,16 @@
 import React from 'react'
+import Button from 'react-bootstrap/esm/Button'
 
 function Result(props) {
     return (
-        <div>
-            <h1>Result :{props.score}</h1>
-        </div>
+        <>
+            <div style={{ marginTop: "8rem" }} className=' bg-dark col-md-5  container center_div text-center border border-dark rounded-3' >
+
+                <h1 className='text-light mt-5'>Result</h1>
+                <h1 className='text-light mt-5 mb-5'>Total Score :{props.score}</h1>
+                <Button className='mb-5 col-lg-5 fs-5 bold'>Graph</Button>
+            </div>
+        </>
     )
 }
 

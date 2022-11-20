@@ -14,7 +14,7 @@ import Start from './Start'
 function QuizPage() {
     const [allQuestions, setAllQestions] = useState([]);
     const [start, setStart] = useState(false)
-    const [current, setCurrent] = useState(5)
+    const [current, setCurrent] = useState(7)
     const [score, setScore] = useState(0)
     const [exit, setExit] = useState(false)
     const [attempt, setAttempt] = useState(false)
@@ -24,7 +24,7 @@ function QuizPage() {
     // console.log(allQuestions[0])
 
     const SortedData = allQuestions.sort((a, b) => a.difficulty - b.difficulty)
-    // console.log(SortedData)
+    console.log(SortedData)
     // console.log(score)
 
     const GetData = () => {
