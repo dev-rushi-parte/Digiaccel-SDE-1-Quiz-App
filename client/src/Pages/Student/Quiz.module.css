@@ -6,7 +6,7 @@
 
 #options {
     /* margin: auto; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(2, 20rem);
     grid-template-rows: repeat(2, 6rem);

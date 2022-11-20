@@ -7,13 +7,23 @@ function Quiz(props) {
     const [questionCount, setQuestionCount] = useState(1)
     const nextQuestion = () => {
         if (ans == props.question.answer) {
+            
             props.setCurrent(prv => prv + 1)
+            props.setScore(prv => prv + 5)
             setAns("")
+            if (props.question.difficulty == 10) {
+                props.setExit(true)
+            }
         }
         else {
             console.log("hii")
             props.setCurrent(prv => prv - 1)
+            props.setScore(prv => prv - 2)
+
             setAns("")
+            if (props.question.difficulty == 1) {
+                props.setExit(true)
+            }
         }
         setQuestionCount(questionCount + 1)
     }
@@ -71,7 +81,9 @@ function Quiz(props) {
                 {/* Next button */}
 
                 {questionCount < 10 ? <Button disabled={ans == '' ? true : false} className='col-lg-6 col-md-5 col-sm-4 col-5 mb-5 mt-5'
-                    onClick={nextQuestion} >Next</Button> : <Button>Save</Button>}
+                    onClick={nextQuestion} >Next</Button> :
+                    <Button onClick={() => props.setExit(true)} className='col-lg-6 col-md-5 col-sm-4 col-5 mb-5 mt-5'>
+                        Save</Button>}
             </div>
         </>
     )
