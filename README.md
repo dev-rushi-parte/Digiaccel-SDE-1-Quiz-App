@@ -87,4 +87,5 @@ These are the features we provide.
 - User Authentication
 - Role Base Authorization
 - Score & Attempts Graph
+- All Pages Are Responsive
 
