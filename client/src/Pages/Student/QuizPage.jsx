@@ -1,12 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import Button from 'react-bootstrap/esm/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { GetQuestions } from '../../Redux/AppReducer/Action'
 import Quiz from './Quiz'
-import style from "./Quiz.module.css";
 import Result from './Result'
 import Start from './Start'
 
@@ -14,7 +12,7 @@ import Start from './Start'
 function QuizPage() {
     const [allQuestions, setAllQestions] = useState([]);
     const [start, setStart] = useState(false)
-    const [current, setCurrent] = useState(7)
+    const [current, setCurrent] = useState(4)
     const [score, setScore] = useState(0)
     const [exit, setExit] = useState(false)
     const [attempt, setAttempt] = useState(false)
