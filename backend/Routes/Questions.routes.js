@@ -68,17 +68,31 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
 QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
 
     try {
-        const { limit } = req.body;
-        console.log(limit, req.params.id)
-        let questions = await QuestionModel.aggregate([{ $sample: { size: Number(limit) } }])
+    // console.log(limit, req.params.id)
+    let allData = await QuestionModel.find();
+    let questions = await QuestionModel.aggregate([{ $sample: { size: Number(allData.length) } }])
 
-        const LinkQuestions = questions?.filter((r) => delete (r._id)).map((q) => (
-            LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
-        ))
 
-        const fullURL = "http://" + "localhost:3000" + "/" + "quiz" + "/" + req.params.id;
+    let TenQuestion = [];
+    let obj = {}
+    for (let i = 0; i < questions.length; i++) {
 
-        res.status(200).send({ "URL": fullURL })
+        if (!obj[questions[i].difficulty]) {
+            TenQuestion.push(questions[i]);
+            obj[questions[i].difficulty] = true
+            if (TenQuestion.length == 10) {
+                break
+            }
+        }
+    }
+
+    const LinkQuestions = TenQuestion?.filter((r) => delete (r._id)).map((q) => (
+        LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
+    ))
+
+    const fullURL = "http://" + "localhost:3000" + "/" + "quiz" + "/" + req.params.id;
+
+    res.status(200).send({ "URL": fullURL })
 
     }
     catch (err) {
