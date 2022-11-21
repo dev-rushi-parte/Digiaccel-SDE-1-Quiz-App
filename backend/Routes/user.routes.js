@@ -7,11 +7,12 @@ const AuthRouter = require("express").Router();
 const UserModel = require("../Models/User.model")
 const { checkAllFields, checkLoginFields } = require("../Middleware/AuthFields")
 
-// singup
+// singup / Register Student Route
 AuthRouter.post("/singup", checkAllFields, async (req, res) => {
 
     const { email, name, password } = req.body
-    // console.log(email)
+    // This is checking User is already present in Collection or not
+
     const checkUserEmail = await UserModel.findOne({ email }).exec();
     const checkName = await UserModel.findOne({ name }).exec();
 
@@ -27,10 +28,11 @@ AuthRouter.post("/singup", checkAllFields, async (req, res) => {
 
     else {
         try {
+            // hashing the password with bcrypt
             await bcrypt.genSalt(6, async function (err, salt) {
                 bcrypt.hash(password, salt, async function (err, hash) {
                     if (err) {
-                        res.send("please try again")
+                        res.status(503).send("please try again")
                     }
                     const user = new UserModel({
                         email,
@@ -39,23 +41,24 @@ AuthRouter.post("/singup", checkAllFields, async (req, res) => {
                     })
 
                     await user.save();
-                    res.send("Singup is successfull")
+                    res.status(201).send("Singup is successfull")
                 });
             });
         }
         catch (err) {
-            console.log(err);
+
             res.status(500).send(err)
         }
     }
 
 })
 
-// singup
+// Singup for Admin Route
 AuthRouter.post("/admin", checkAllFields, async (req, res) => {
 
     const { email, name, password } = req.body
-    // console.log(email)
+    // This is checking User is already present in Collection or not
+
     const checkUserEmail = await UserModel.findOne({ email }).exec();
     const checkName = await UserModel.findOne({ name }).exec();
 
@@ -74,7 +77,7 @@ AuthRouter.post("/admin", checkAllFields, async (req, res) => {
             await bcrypt.genSalt(6, async function (err, salt) {
                 bcrypt.hash(password, salt, async function (err, hash) {
                     if (err) {
-                        res.send("please try again")
+                        res.status(503).send("please try again")
                     }
                     const user = new UserModel({
                         email,
@@ -84,7 +87,7 @@ AuthRouter.post("/admin", checkAllFields, async (req, res) => {
                     })
 
                     await user.save();
-                    res.send("Singup is successfull")
+                    res.status(201).send("Singup is successfull")
                 });
             });
         }
@@ -95,8 +98,8 @@ AuthRouter.post("/admin", checkAllFields, async (req, res) => {
     }
 
 })
-// Login
 
+// Login Route for both student as well as admin
 AuthRouter.post("/login", checkLoginFields, async (req, res) => {
 
     try {
@@ -109,9 +112,10 @@ AuthRouter.post("/login", checkLoginFields, async (req, res) => {
 
         }
 
+        // Sending userid ans email in token
         const hash = user.password;
         const userId = user._id;
-        console.log(userId)
+
         bcrypt.compare(password, hash, (err, result) => {
             if (result) {
                 var token = jwt.sign({ email, userId }, process.env.KEY);

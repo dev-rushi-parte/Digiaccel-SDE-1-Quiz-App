@@ -12,14 +12,15 @@ QuestionRoutes.get("/loginuser", async (req, res) => {
     const { userId } = req.body;
 
     const user = await await UserModel.findById(userId);
-    res.send(user)
+    res.status(200).send(user)
 })
 
-
+// Create the Question Route
 QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, res) => {
 
     const { difficulty, question, answer, multiAnswer, option1, option2, option3, option4, userId } = req.body;
 
+    // Single Answer Question
 
     if (multiAnswer === undefined) {
 
@@ -42,6 +43,7 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
             res.status(500).json(err)
         }
     }
+    // Multi Answer Question
     else if (multiAnswer !== undefined) {
         const AddNewQue = new QuestionModel({
             difficulty,
@@ -65,40 +67,50 @@ QuestionRoutes.post("/create_question", Authorization(["admin"]), async (req, re
 
 })
 
+// get the Random 10 Question 
 QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
 
     try {
-    // console.log(limit, req.params.id)
-    let allData = await QuestionModel.find();
-    let questions = await QuestionModel.aggregate([{ $sample: { size: Number(allData.length) } }])
+        // get All question
+        let allData = await QuestionModel.find();
+        // Shuffle All the Question every time
+        let questions = await QuestionModel.aggregate([{ $sample: { size: Number(allData.length) } }])
 
+        // Logic For getting First 10 question which has difficulty level is 1 to 10
+        let TenQuestion = [];
+        let obj = {}
+        for (let i = 0; i < questions.length; i++) {
 
-    let TenQuestion = [];
-    let obj = {}
-    for (let i = 0; i < questions.length; i++) {
-
-        if (!obj[questions[i].difficulty]) {
-            TenQuestion.push(questions[i]);
-            obj[questions[i].difficulty] = true
-            if (TenQuestion.length == 10) {
-                break
+            if (!obj[questions[i].difficulty]) {
+                TenQuestion.push(questions[i]);
+                obj[questions[i].difficulty] = true
+                if (TenQuestion.length == 10) {
+                    break
+                }
             }
         }
-    }
 
-    const LinkQuestions = TenQuestion?.filter((r) => delete (r._id)).map((q) => (
-        LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
-    ))
+        // Remove the _id from each object Because Mongodb giving error for same _id
 
-    const fullURL = "http://" + "localhost:3000" + "/" + "quiz" + "/" + req.params.id;
+        const LinkQuestions = TenQuestion?.filter((r) => delete (r._id)).map((q) => (
 
-    res.status(200).send({ "URL": fullURL })
+            // Adding those 0 question to seperate Collection with Generated uuid
+            LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
+        ))
+
+        // Random URL send to Home page
+
+        const fullURL = "http://" + "localhost:3000" + "/" + "quiz" + "/" + req.params.id;
+
+        res.status(200).send({ "URL": fullURL })
 
     }
     catch (err) {
         res.status(404).json({ err: "Qutestion Not Found" })
     }
 })
+
+// Get the question from that uuid from LinkQuestions Collection
 
 QuestionRoutes.get("/:uuid", async (req, res) => {
 
@@ -107,10 +119,9 @@ QuestionRoutes.get("/:uuid", async (req, res) => {
 
     const data = await LinkQuestionsModel.find({ uuid })
 
-    // console.log(data.length)
 
     if (data.length <= 0) {
-        res.send({ erroe: true, "msg": "Error 404, This url not Found" })
+        res.status(404).send({ erroe: true, "msg": "Error 404, This url not Found" })
     }
     else {
         res.status(200).send({ Total: data.length, data })

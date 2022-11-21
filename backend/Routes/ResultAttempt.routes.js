@@ -2,6 +2,7 @@ const ResultRouter = require("express").Router();
 
 const ResultModel = require("../Models/ResultAttempt.model");
 
+// Post the user result data
 ResultRouter.post("/:id", async (req, res) => {
 
     try {
@@ -9,10 +10,9 @@ ResultRouter.post("/:id", async (req, res) => {
         const { userId, scrore } = req.body
 
         const checkUser = await ResultModel.findOne({ userId: id });
-        const size = await ResultModel.findOne({ userId: id }).count();
-        console.log(id, "frId")
-        console.log(checkUser, "userData")
-        console.log(userId, "userId")
+        const size = await ResultModel.find({ userId: id }).count();
+
+        // Already Login user Taking size of Colletion and adding one to it for user attempt
         if (checkUser) {
             if (checkUser.userId == userId) {
                 const AddNewUserResult = new ResultModel({
@@ -36,6 +36,7 @@ ResultRouter.post("/:id", async (req, res) => {
 
         }
         else {
+            // First time login user 
             const AddNewUserResult = new ResultModel({
                 userId,
                 scrore,
@@ -58,6 +59,8 @@ ResultRouter.post("/:id", async (req, res) => {
     }
 })
 
+
+// Get the User Result Data
 
 ResultRouter.get("/", async (req, res) => {
     const { userId } = req.body
