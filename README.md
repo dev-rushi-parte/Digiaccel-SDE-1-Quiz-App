@@ -24,7 +24,7 @@
 
 This is a Assignment which Digiaccel given me for SDE-1 Position.
 I tried to Make a Quiz website with all the Concepts I learned in Masai School . Checkout My Digiaccel Quiz Website  by clicking on the
-link below and find the Source Code in the Main Branch.
+link below and find the Source Code in the Master Branch.
 
 [Demo Link](https://quiz-frontend-eight.vercel.app/)
 
