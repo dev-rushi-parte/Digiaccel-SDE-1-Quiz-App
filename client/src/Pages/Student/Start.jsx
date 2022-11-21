@@ -2,6 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/esm/Button'
 
 function Start(props) {
+
     return (
         <>
             <div style={{ marginTop: "8rem" }} className=' bg-dark col-md-5  container center_div text-center border border-dark rounded-3' >

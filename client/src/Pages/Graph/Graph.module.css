@@ -1,0 +1,20 @@
+#box {
+    position: relative;
+    margin-left: 500px;
+    margin-top: 50px;
+   
+}
+
+
+#box h1:nth-child(1) {
+    writing-mode: vertical-lr;
+    position: absolute;
+    top: 180px
+}
+
+
+.attempt {
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 150px;
+}

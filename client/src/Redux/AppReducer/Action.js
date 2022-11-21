@@ -73,3 +73,51 @@ export const GetQuestions = (payload) => async (dispatch) => {
             console.log(err)
         })
 }
+
+
+
+
+export const post_score = (payload) => ({
+    type: types.GET_QUESTIONS,
+    payload
+})
+
+export const PostScore = (payload) => async (dispatch) => {
+
+    return await axios.post(`/result/${payload.id}`, payload, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${payload.token}`
+        }
+    })
+        .then((res) => {
+            // return (dispatch(post_score(res)))
+            console.log(res)
+
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+
+export const getattemptsscore = (payload) => ({
+    type: types.GET_SCORE_ATTEMPTS,
+    payload
+})
+
+export const GetAttemptsScore = (token) => async (dispatch) => {
+
+    return await axios.get("/result/", {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then((res) => {
+            return dispatch(getattemptsscore(res))
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

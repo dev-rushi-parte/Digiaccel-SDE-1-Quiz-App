@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/esm/Button'
+import { useDispatch, useSelector } from 'react-redux'
+import { PostScore } from '../../Redux/AppReducer/Action'
 import style from "./Quiz.module.css"
 function Quiz(props) {
 
     // console.log(props)
     const [ans, setAns] = useState([])
     const [questionCount, setQuestionCount] = useState(1)
-    console.log(ans[0] === props.question.answer)
+    const token = useSelector((state) => state.auth.authToken)
+    const dispatch = useDispatch()
+    const LoginUser = useSelector((state) => state.auth.LoginUser)
+    console.log(LoginUser._id)
+
+    // Function For next question (Pagination)
     const nextQuestion = () => {
 
         if (props.question.multiAnswer.length > 0 && props.question.multiAnswer.length <= 2 && ans.includes(props.question.multiAnswer[0]) && ans.includes(props.question.multiAnswer[1])) {
@@ -45,10 +52,37 @@ function Quiz(props) {
 
     }
 
+    // PostScore || savescore in data base Function
+
+    const SaveScore = () => {
+        console.log(props.score)
+
+        const payload = {
+            id: LoginUser._id,
+            token,
+            scrore: props.score
+        }
+        dispatch(PostScore(payload))
+            .then((res) => {
+                console.log(res)
+            })
+        props.setExit(true)
+
+
+
+
+    }
+
+    // Answer Saving
+
     const AnswerFun = (answer) => {
         setAns([...ans, answer]);
 
     }
+
+
+
+
     return (
         <>
 
@@ -167,8 +201,8 @@ function Quiz(props) {
                 </div>
 
                 {/* Next button */}
-
-                {questionCount < 10 ?
+                {/* Checking all coditions for save button */}
+                {questionCount < 10 && props.question.difficulty < 10 && props.question.difficulty > 1 ?
                     // Multi answer
 
                     props.question.multiAnswer.length > 0 ?
@@ -180,7 +214,7 @@ function Quiz(props) {
                         <Button disabled={ans == '' ? true : false} className='col-lg-6 col-md-5 col-sm-4 col-5 mb-5 mt-5'
                             onClick={nextQuestion} >Next</Button> :
                     // last button will be save
-                    <Button onClick={() => props.setExit(true)} className='col-lg-6 col-md-5 col-sm-4 col-5 mb-5 mt-5'>
+                    <Button onClick={SaveScore} className='col-lg-6 col-md-5 col-sm-4 col-5 mb-5 mt-5'>
                         Save</Button>}
             </div>
         </>

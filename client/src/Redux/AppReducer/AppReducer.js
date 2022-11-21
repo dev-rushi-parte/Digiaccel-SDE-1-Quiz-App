@@ -40,6 +40,24 @@ export const AppReducer = (state = inState, action) => {
                 payload
             }
         }
+        case types.POST_SCORE: {
+            console.log(payload)
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                payload
+            }
+        }
+
+        case types.GET_SCORE_ATTEMPTS: {
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                payload
+            }
+        }
         default:
             return state
 

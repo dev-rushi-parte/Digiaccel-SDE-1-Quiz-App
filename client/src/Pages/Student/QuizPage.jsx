@@ -15,7 +15,6 @@ function QuizPage() {
     const [current, setCurrent] = useState(4)
     const [score, setScore] = useState(0)
     const [exit, setExit] = useState(false)
-    const [attempt, setAttempt] = useState(false)
     const { id } = useParams()
     const token = useSelector((state) => state.auth.authToken)
     const dispatch = useDispatch()
@@ -47,9 +46,9 @@ function QuizPage() {
 
 
 
-    if (attempt === true) {
-        console.log("1")
-    }
+
+
+
 
     return (
         <>
@@ -57,7 +56,7 @@ function QuizPage() {
                 <>
                     {
                         start ?
-                            <Quiz setExit={setExit} setScore={setScore} question={SortedData[current]} setCurrent={setCurrent} />
+                            <Quiz score={score} setExit={setExit} setScore={setScore} question={SortedData[current]} setCurrent={setCurrent} />
                             :
                             <Start setStart={setStart} />
                     }

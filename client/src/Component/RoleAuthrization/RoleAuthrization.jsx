@@ -12,7 +12,7 @@ function RoleAuthrization({ children }) {
     useEffect(() => {
         dispatch(LoginUserData(token))
             .then((res) => {
-                console.log(res.payload, "page")
+                // console.log(res.payload, "page")
                 setUserName(res?.payload)
             })
     }, [])

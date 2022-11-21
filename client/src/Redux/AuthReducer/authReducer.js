@@ -7,7 +7,7 @@ const inState = {
     authToken: getLocalData("authToken") || false,
     isLoading: false,
     isError: false,
-    LoginUser: []
+    LoginUser: getLocalData("userId") || []
 }
 
 export const authReducer = (state = inState, action) => {
@@ -90,6 +90,7 @@ export const authReducer = (state = inState, action) => {
         case types.GET_LOGIN_USER: {
             console.log(payload, "reducer Payload")
             // console.log("reducer with login user")
+            SaveTheToken("userId", payload)
             return {
                 ...state,
                 LoginUser: payload

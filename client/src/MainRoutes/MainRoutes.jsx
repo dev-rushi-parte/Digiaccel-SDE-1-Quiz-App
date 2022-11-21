@@ -10,6 +10,7 @@ import Login from '../Pages/Account/Login';
 import Signup from '../Pages/Account/Signup';
 import AddQuestions from '../Pages/Admin/AddQuestions';
 import AdminHome from '../Pages/Admin/AdminHome';
+import LineGraph from '../Pages/Graph/LineGraph';
 import PageNotfound from '../Pages/PageNotfound';
 import QuizPage from '../Pages/Student/QuizPage';
 import StudentHome from '../Pages/Student/StudentHome';
@@ -31,6 +32,11 @@ export default function MainRoutes() {
                 <Route path='/student' element={<PrivateAuth><StudentHome /></PrivateAuth>} />
                 <Route path='/quiz/:id' element={<PrivateAuth><QuizPage /></PrivateAuth>} />
 
+                {/* Graph Route */}
+
+                <Route path='/graph' element={<PrivateAuth><LineGraph /></PrivateAuth>} />
+
+                {/* For wrong URL */}
                 <Route path="*" element={<PageNotfound />} />
             </Routes>
         </>
