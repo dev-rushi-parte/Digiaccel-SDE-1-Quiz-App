@@ -100,7 +100,7 @@ QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
 
         // Random URL send to Home page
 
-        const fullURL = "http://" + "localhost:3000" + "/" + "quiz" + "/" + req.params.id;
+        const fullURL = "https://quiz-frontend-eight.vercel.app/" + "quiz" + "/" + req.params.id;
 
         res.status(200).send({ "URL": fullURL })
 
