@@ -8,14 +8,15 @@ ResultRouter.post("/:id", async (req, res) => {
         const { id } = req.params
         const { userId, scrore } = req.body
 
-        const checkUser = await ResultModel.findOne({ userId });
-
-
+        const checkUser = await ResultModel.findOne({ userId: id });
+        console.log(id, "frId")
+        console.log(checkUser, "userData")
+        console.log(userId, "userId")
         if (checkUser) {
-            if (checkUser.userId == id) {
-
-                let att = await ResultModel.updateOne({ $push: { attempt: Number(checkUser.attempt[checkUser.attempt.length - 1]) + 1 } });
-                let scor = await ResultModel.updateOne({ $push: { scrore: scrore } });
+            if (checkUser.userId == userId) {
+                console.log(id)
+                let att = await checkUser.updateOne({ $push: { attempt: Number((checkUser.attempt[checkUser.attempt.length - 1])) + 1 } });
+                let scor = await checkUser.updateOne({ $push: { scrore: scrore } });
 
 
                 res.status(200).json({ "message": "Data Updated" })
