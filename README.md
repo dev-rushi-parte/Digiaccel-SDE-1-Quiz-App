@@ -32,7 +32,8 @@ link below and find the Source Code in the Main Branch.
 [Postman Collection](https://drive.google.com/file/d/1PHiLlg4L-e8JDJVGqpk7pkvKYSwX8cTD/view?usp=sharing) You an simply download this file and import in your Postman. 
 
 
-<!-- PROJECT SCHEMA DIAGRAM -->
+
+##  Project Schema Diagram
 
 ![Quiz Schema](https://user-images.githubusercontent.com/96285307/203134895-96b7082d-c2ad-453e-be8a-7d5744bdf6a5.png)
 ### Built With
