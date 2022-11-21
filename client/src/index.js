@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import axios from 'axios';
 import { Store } from './Redux/Store';
 
-axios.defaults.baseURL = "http://localhost:2784";
+axios.defaults.baseURL = "https://quiz-backend-two.vercel.app/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 

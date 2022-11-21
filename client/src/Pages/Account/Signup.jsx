@@ -41,6 +41,7 @@ function Signup() {
 
                 if (res.type == "SINGUP_SUCCESS") {
                     setAlertSuccess(true)
+                    alert("Singup Success")
                     navigate("/login")
                     setTimeout(() => {
                         setAlertSuccess(false)

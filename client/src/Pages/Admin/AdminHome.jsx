@@ -34,7 +34,7 @@ function AdminHome() {
     const GenerateLink = () => {
         setLoading(false)
         const id = uuid()
-        // console.log(id)
+       
         const payload = {
             id,
             token
@@ -42,7 +42,7 @@ function AdminHome() {
         }
         dispatch(GetQuizLink(payload))
             .then((res) => {
-                console.log(res)
+               
                 if (res.type == "GET_QUIZ_LINK") {
                     setLoading(true)
                     setLink(res.payload.data.URL)
@@ -50,7 +50,7 @@ function AdminHome() {
 
                 }
             })
-        console.log(payload)
+        
 
     }
 

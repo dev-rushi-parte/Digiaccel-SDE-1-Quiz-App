@@ -23,7 +23,7 @@ export const authReducer = (state = inState, action) => {
             }
         }
         case types.SINGUP_SUCCESS: {
-            // console.log(payload, "Response in reducer")
+          
             return {
                 ...state,
                 isLoading: false,
@@ -45,7 +45,7 @@ export const authReducer = (state = inState, action) => {
             }
         }
         case types.ADMIN_SUCCESS: {
-            console.log(payload, "Response in reducer")
+            
             return {
                 ...state,
                 isLoading: false,
@@ -67,7 +67,7 @@ export const authReducer = (state = inState, action) => {
             }
         }
         case types.LOGIN_SUCCESS: {
-            console.log(payload, "Response in reducer")
+           
             SaveTheToken("authToken", payload.data.token)
 
             return {
@@ -88,8 +88,7 @@ export const authReducer = (state = inState, action) => {
             }
         }
         case types.GET_LOGIN_USER: {
-            console.log(payload, "reducer Payload")
-            // console.log("reducer with login user")
+           
             SaveTheToken("userId", payload)
             return {
                 ...state,

@@ -7,19 +7,22 @@ import * as d3 from 'd3'
 import { useRef } from 'react';
 import style from './Graph.module.css'
 import NavbarTop from '../../Component/NavbarTop';
+import Spinner from 'react-bootstrap/esm/Spinner';
 function LineGraph() {
 
     const svgRef = useRef()
-
+    const [status, setStatus] = useState(true)
     const [allData, setAllData] = useState([])
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.authToken)
 
 
-    console.log(allData)
+
     useEffect(() => {
+        setStatus(false)
         dispatch(GetAttemptsScore(token))
             .then((res) => {
+                setStatus(true)
                 setAllData(res.payload.data)
 
             })
@@ -29,7 +32,7 @@ function LineGraph() {
     const width = 500;
     const height = 400;
     const padding = 60;
-    const maxValue = 20
+
 
 
     useEffect(() => {
@@ -101,15 +104,15 @@ function LineGraph() {
                 <h1 className='text-dark text-center' >Graph</h1>
                 <div id={style.box}>
 
-                    <h1 >Score</h1>
-                    <>
+                    {status ? <>
+                        <h1 >Score</h1>
                         <svg id='chart' ref={svgRef} viewBox='0 0 1000 400'>
                             <rect width='500' height='500' fill='rgb(140,137,131)' />
                             <path d='' fill='none' stroke='white' strokeWidth='2' />
 
                         </svg>
-                    </>
-                    <h1 className={style.attempt}>Attempt</h1>
+                        <h1 className={style.attempt}>Attempt</h1>
+                    </> : <Spinner animation="border" />}
                 </div>
             </div>
         </>

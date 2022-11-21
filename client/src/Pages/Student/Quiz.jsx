@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/esm/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostScore } from '../../Redux/AppReducer/Action'
+import { LoginUserData } from '../../Redux/AuthReducer/action'
 import style from "./Quiz.module.css"
 function Quiz(props) {
 
-    // console.log(props)
+   
     const [ans, setAns] = useState([])
+    const [LoginUser, setLoginUser] = useState()
     const [questionCount, setQuestionCount] = useState(1)
     const token = useSelector((state) => state.auth.authToken)
     const dispatch = useDispatch()
-    const LoginUser = useSelector((state) => state.auth.LoginUser)
-    console.log(LoginUser._id)
+ 
 
     // Function For next question (Pagination)
     const nextQuestion = () => {
@@ -80,7 +81,13 @@ function Quiz(props) {
 
     }
 
-
+    useEffect(() => {
+        dispatch(LoginUserData(token))
+            .then((res) => {
+                
+                setLoginUser(res?.payload)
+            })
+    }, [])
 
 
     return (

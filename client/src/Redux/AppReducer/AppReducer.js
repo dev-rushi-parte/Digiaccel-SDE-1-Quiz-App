@@ -23,7 +23,7 @@ export const AppReducer = (state = inState, action) => {
             }
         }
         case types.GET_QUIZ_LINK: {
-            // console.log(payload)
+           
             return {
                 ...state,
                 isLoading: false,
@@ -32,7 +32,7 @@ export const AppReducer = (state = inState, action) => {
             }
         }
         case types.GET_QUESTIONS: {
-            // console.log(payload)
+           
             return {
                 ...state,
                 isLoading: false,

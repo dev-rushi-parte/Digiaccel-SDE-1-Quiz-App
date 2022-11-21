@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { CreateQuestions } from '../../Redux/AppReducer/Action';
+import { useNavigate } from 'react-router-dom';
 function AddQuestions() {
 
     const [question, setQuestion] = useState("")
@@ -18,7 +19,7 @@ function AddQuestions() {
     const [option4, setOption4] = useState("")
     const [difficulty, setDifficulty] = useState()
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     const token = useSelector((state) => state.auth.authToken)
 
     // Add question Function
@@ -40,7 +41,17 @@ function AddQuestions() {
                 .then((res) => {
                     console.log(res)
                     if (res.type == 'ADD_QUESTION') {
+
+                        setQuestion("")
+                        setAnswer("")
+                        setAnswer2("")
+                        setOption1("")
+                        setOption2("")
+                        setOption3("")
+                        setOption4("")
+                        setMulti(false)
                         alert("Question Created")
+                        navigate("/")
                     }
                     else {
                         alert("Something went wrong")
@@ -69,7 +80,7 @@ function AddQuestions() {
                     }
                 })
 
-            // console.log(payload)
+           
         }
     }
 

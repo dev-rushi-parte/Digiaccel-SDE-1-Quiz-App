@@ -18,11 +18,11 @@ function QuizPage() {
     const { id } = useParams()
     const token = useSelector((state) => state.auth.authToken)
     const dispatch = useDispatch()
-    // console.log(allQuestions[0])
+
 
     const SortedData = allQuestions.sort((a, b) => a.difficulty - b.difficulty)
     console.log(SortedData)
-    // console.log(score)
+
 
     const GetData = () => {
 
@@ -30,10 +30,10 @@ function QuizPage() {
             uuid: id,
             token
         }
-        // console.log(payload)
+
         dispatch(GetQuestions(payload))
             .then((res) => {
-                // console.log(res)
+
                 setAllQestions(res.payload.data)
             })
 

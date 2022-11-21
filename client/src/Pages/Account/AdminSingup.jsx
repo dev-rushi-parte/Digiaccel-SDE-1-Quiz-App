@@ -34,7 +34,6 @@ function AdminSingup() {
         console.log(payload)
         dispatch(AdminSingupAction(payload))
             .then((res) => {
-                console.log(res)
                 setName("")
                 setEmail("")
                 setPassword("")

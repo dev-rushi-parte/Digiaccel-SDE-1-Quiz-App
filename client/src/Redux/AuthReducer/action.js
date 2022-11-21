@@ -65,7 +65,7 @@ export const UserLogin = (payload) => (dispatch) => {
 
     return axios.post("/user/login", payload)
         .then((res) => {
-            // console.log(res.data, "login")
+           
             return dispatch(loginSuccess(res));
 
         })
@@ -128,7 +128,7 @@ export const LoginUserData = (token) => async (dispatch) => {
     })
         .then((res) => {
             return (dispatch(loginUser(res.data)))
-            // console.log(res.data)
+          
 
         })
         .catch((err) => {

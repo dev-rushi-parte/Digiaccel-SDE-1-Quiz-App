@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import styles from './All.module.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { UserLogin } from '../../Redux/AuthReducer/action';
 import Alert from 'react-bootstrap/Alert';
@@ -18,6 +18,7 @@ function Login() {
     const [alertSms, setAlertSms] = useState("")
     let dispatch = useDispatch()
     let navigate = useNavigate()
+    let location = useLocation()
 
     const handleClick = () => setShow(!show);
 
@@ -31,17 +32,24 @@ function Login() {
         console.log(payload)
         dispatch(UserLogin(payload))
             .then((res) => {
-                console.log(res)
+                
                 setEmail("")
                 setPassword("")
 
                 if (res.type == "LOGIN_SUCCESS") {
+                    alert("Login Success")
                     setAlertSuccess(true)
 
                     setTimeout(() => {
                         setAlertSuccess(false)
                     }, 2000)
-                    navigate("/")
+
+                    if (location.state?.from) {
+                        navigate(location.state.from)
+                    }
+                    else {
+                        navigate("/")
+                    }
 
 
                 }

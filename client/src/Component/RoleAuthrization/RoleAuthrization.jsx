@@ -7,12 +7,11 @@ function RoleAuthrization({ children }) {
     const [userName, setUserName] = useState();
     const token = useSelector((state) => state.auth.authToken)
 
-    // console.log(userName?.name)
+
 
     useEffect(() => {
         dispatch(LoginUserData(token))
             .then((res) => {
-                // console.log(res.payload, "page")
                 setUserName(res?.payload)
             })
     }, [])
@@ -21,11 +20,9 @@ function RoleAuthrization({ children }) {
         return null
 
     }
-    // else if (userName?.role == 'admin') {
-
-    // }
+    
     else {
-        // console.log(children, "children")
+        
         return children
     }
 }

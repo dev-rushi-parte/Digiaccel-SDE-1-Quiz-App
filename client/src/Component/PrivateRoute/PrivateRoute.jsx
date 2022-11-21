@@ -5,16 +5,14 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 
 function PrivateAuth({ children }) {
+    // get isAuth from redux auth store
     const isAuth = useSelector((state) => state.auth.isAuth);
-  
+
     const location = useLocation();
 
-    const from = {
-        pathname: location.pathname,
-    };
-
+    // isAuth true then go to component otherwise show login page
     if (isAuth) return children;
-    return <Navigate to={'/login'} state={from} replace />
+    return <Navigate to={'/login'} replace state={{ from: location }} />
 
 
 

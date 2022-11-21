@@ -19,7 +19,7 @@ export const CreateQuestions = (payload) => async (dispatch) => {
     })
         .then((res) => {
             return (dispatch(addquestion(res.data)))
-            // console.log(res)
+      
 
         })
         .catch((err) => {
@@ -43,8 +43,7 @@ export const GetQuizLink = (payload) => async (dispatch) => {
     })
         .then((res) => {
             return (dispatch(getquizlink(res)))
-            // console.log(res)
-
+          
         })
         .catch((err) => {
             console.log(err)
@@ -66,7 +65,7 @@ export const GetQuestions = (payload) => async (dispatch) => {
     })
         .then((res) => {
             return (dispatch(getquestion(res.data)))
-            // console.log(res)
+        
 
         })
         .catch((err) => {
@@ -91,8 +90,8 @@ export const PostScore = (payload) => async (dispatch) => {
         }
     })
         .then((res) => {
-            // return (dispatch(post_score(res)))
-            console.log(res)
+            return (dispatch(post_score(res)))
+            
 
         })
         .catch((err) => {
