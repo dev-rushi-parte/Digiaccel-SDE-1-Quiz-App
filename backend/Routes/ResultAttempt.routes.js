@@ -2,23 +2,28 @@ const ResultRouter = require("express").Router();
 
 const ResultModel = require("../Models/ResultAttempt.model");
 
-ResultRouter.post("/", async (req, res) => {
+ResultRouter.post("/:id", async (req, res) => {
 
     try {
+        const { id } = req.params
         const { userId, scrore } = req.body
 
         const checkUser = await ResultModel.findOne({ userId });
 
 
         if (checkUser) {
+            if (checkUser.userId == id) {
 
-            if (checkUser.userId === userId) {
                 let att = await ResultModel.updateOne({ $push: { attempt: Number(checkUser.attempt[checkUser.attempt.length - 1]) + 1 } });
                 let scor = await ResultModel.updateOne({ $push: { scrore: scrore } });
 
 
                 res.status(200).json({ "message": "Data Updated" })
             }
+            else {
+                res.status(401).send("You are Unauthorized")
+            }
+
         }
         else {
             const AddNewUserResult = new ResultModel({
