@@ -28,7 +28,6 @@ link below and find the Source Code in the Master Branch.
 
 [Demo Link](https://quiz-frontend-eight.vercel.app/)
 
-[Video Explanation](https://drive.google.com/file/d/1xoDzh2W-1cbH-6-CMr2hO-3gQ7SYM1_v/view?usp=sharing) All pages are Responsive. 
 
 [Postman Collection](https://drive.google.com/file/d/1PHiLlg4L-e8JDJVGqpk7pkvKYSwX8cTD/view?usp=sharing) You an simply download this file and import in your Postman. 
 
