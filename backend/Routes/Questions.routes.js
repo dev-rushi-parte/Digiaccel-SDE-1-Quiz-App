@@ -91,18 +91,22 @@ QuestionRoutes.post("/:id", Authorization(["admin"]), async (req, res) => {
         }
 
         // Remove the _id from each object Because Mongodb giving error for same _id
-
         const LinkQuestions = TenQuestion?.filter((r) => delete (r._id)).map((q) => (
 
-            // Adding those 0 question to seperate Collection with Generated uuid
-            LinkQuestionsModel.insertMany([{ ...q, uuid: req.params.id }])
+            // Adding those 10 question to seperate Collection with Generated uuid
+            { ...q, uuid: req.params.id }
         ))
+
+        await LinkQuestionsModel.insertMany(LinkQuestions)
+
 
         // Random URL send to Home page
 
         const fullURL = "https://quiz-frontend-eight.vercel.app/" + "quiz" + "/" + req.params.id;
 
         res.status(200).send({ "URL": fullURL })
+
+
 
     }
     catch (err) {
