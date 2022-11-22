@@ -32,7 +32,7 @@ function Login() {
         console.log(payload)
         dispatch(UserLogin(payload))
             .then((res) => {
-                
+
                 setEmail("")
                 setPassword("")
 
@@ -55,7 +55,7 @@ function Login() {
                 }
                 else if (res.type == "LOGIN_FAILURE") {
                     setAlertFail(true)
-                    setAlertSms(res.payload.response.data.message)
+                    setAlertSms("Invalid User Credentials")
                     setTimeout(() => {
                         setAlertFail(false)
                     }, 2000)

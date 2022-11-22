@@ -9,7 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 import { AdminSingupAction } from '../../Redux/AuthReducer/action';
 import { useNavigate } from 'react-router-dom';
 
-function AdminSingup() {
+function AdminSignup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -47,7 +47,7 @@ function AdminSingup() {
                 }
                 else if (res.type == "SINGUP_FAILURE") {
                     setAlertFail(true)
-                    setAlertSms(res.payload.response.data.message)
+                    setAlertSms("User already exists")
                     setTimeout(() => {
                         setAlertFail(false)
                     }, 1000)
@@ -118,7 +118,7 @@ function AdminSingup() {
                         </Form.Group>
 
                         <Button className='col-md-12 mt-3 ' variant="danger" type="submit">
-                            SingUp
+                            SignUp
                         </Button>
                         <Button onClick={() => navigate("/login")} style={{ marginLeft: '49%' }} variant="link"> Have an account? Login</Button>
                     </Form>
@@ -129,4 +129,4 @@ function AdminSingup() {
     )
 }
 
-export default AdminSingup
+export default AdminSignup

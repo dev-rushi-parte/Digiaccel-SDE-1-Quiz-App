@@ -20,7 +20,7 @@ function QuizPage() {
     const dispatch = useDispatch()
 
 
-    const SortedData = allQuestions.sort((a, b) => a.difficulty - b.difficulty)
+    const SortedData = allQuestions?.sort((a, b) => a.difficulty - b.difficulty)
     console.log(SortedData)
 
 
@@ -41,7 +41,7 @@ function QuizPage() {
 
     useEffect(() => {
         GetData()
-    }, [])
+    }, [allQuestions<10])
 
 
 
@@ -56,9 +56,9 @@ function QuizPage() {
                 <>
                     {
                         start ?
-                            <Quiz score={score} setExit={setExit} setScore={setScore} question={SortedData[current]} setCurrent={setCurrent} />
+                            SortedData.length == 10 ? <Quiz score={score} setExit={setExit} setScore={setScore} question={SortedData[current]} setCurrent={setCurrent} /> : "Loading..."
                             :
-                            <Start setStart={setStart} />
+                            <Start SortedData={SortedData}  setStart={setStart} />
                     }
                 </>
 

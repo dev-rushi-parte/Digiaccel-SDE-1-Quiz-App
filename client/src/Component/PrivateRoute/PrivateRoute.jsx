@@ -15,8 +15,6 @@ function PrivateAuth({ children }) {
     return <Navigate to={'/login'} replace state={{ from: location }} />
 
 
-
-
 }
 
 export default PrivateAuth

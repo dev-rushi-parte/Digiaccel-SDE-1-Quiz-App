@@ -4,7 +4,7 @@ import {
     Route,
 } from "react-router-dom";
 import PrivateAuth from '../Component/PrivateRoute/PrivateRoute';
-import AdminSingup from '../Pages/Account/AdminSingup';
+import AdminSignup from '../Pages/Account/AdminSignup';
 import Home from '../Pages/Account/Home';
 import Login from '../Pages/Account/Login';
 import Signup from '../Pages/Account/Signup';
@@ -22,7 +22,7 @@ export default function MainRoutes() {
                 <Route path='/' element={<Home />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
-                <Route exact path='/admin_singup' element={<AdminSingup />} />
+                <Route exact path='/admin_singup' element={<AdminSignup />} />
 
                 {/* Admin Routes */}
                 <Route path='/admin_home' element={<PrivateAuth><AdminHome /></PrivateAuth>} />

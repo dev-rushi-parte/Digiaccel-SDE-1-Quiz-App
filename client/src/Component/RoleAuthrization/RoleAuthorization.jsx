@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoginUserData } from '../../Redux/AuthReducer/action'
 
-function RoleAuthrization({ children }) {
+function RoleAuthorization({ children }) {
     const dispatch = useDispatch()
     const [userName, setUserName] = useState();
     const token = useSelector((state) => state.auth.authToken)
@@ -16,15 +16,15 @@ function RoleAuthrization({ children }) {
             })
     }, [])
 
-    if (userName?.role == 'student') {
-        return null
+    if (userName?.role == 'admin') {
+        return children
 
     }
-    
+
     else {
-        
-        return children
+
+        return null
     }
 }
 
-export default RoleAuthrization
+export default RoleAuthorization

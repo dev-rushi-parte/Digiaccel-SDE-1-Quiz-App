@@ -49,7 +49,7 @@ function Signup() {
                 }
                 else if (res.type == "SINGUP_FAILURE") {
                     setAlertFail(true)
-                    setAlertSms(res.payload.response.data.message)
+                    setAlertSms("User already exists")
                     setTimeout(() => {
                         setAlertFail(false)
                     }, 1000)
@@ -119,7 +119,7 @@ function Signup() {
                         </Form.Group>
 
                         <Button className='col-md-12 mt-3 ' variant="primary" type="submit">
-                            SingUp
+                            SignUp
                         </Button>
                         <Button onClick={() => navigate("/login")} style={{ marginLeft: '50%' }} variant="link"> Have an account? Login</Button>
                     </Form>
