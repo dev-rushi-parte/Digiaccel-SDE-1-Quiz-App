@@ -29,7 +29,7 @@ link below and find the Source Code in the Master Branch.
 [Demo Link](https://quiz-frontend-eight.vercel.app/)
 
 
-[Postman Collection](https://drive.google.com/file/d/1PHiLlg4L-e8JDJVGqpk7pkvKYSwX8cTD/view?usp=sharing) You an simply download this file and import in your Postman. 
+
 
 
 
